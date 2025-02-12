@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+.light {
+  background: #ffffff;
+  color: #333;
+}
+
+.dark {   
+  background: #1f1f1f;
+  color: #fff;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #1890ff;
+  padding: 0 20px;
+}
+
+.logo {
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.content {
+  width: 100%; /* 让内容适应浏览器宽度 */
+  max-width: 1200px; /* 限制最大宽度 */
+  margin: 0 auto; /* 居中对齐 */
+  padding: 20px;
+}
+
+.profile {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.name {
+  margin: 10px 0;
+}
+
+.bio {
+  font-size: 16px;
+  color: #666;
+}
+
+.section {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.tags {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.exp {
+  display: flex;  /* 让子元素横向排列 */
+}
+
+.card {
+  flex: 1 1 300px;  /* 让卡片自适应宽度，但最小宽度是 300px */
+  max-width: 400px; /* 限制最大宽度，否则会拉伸 */
+  box-sizing: border-box; /* 确保 padding 不影响宽度 */
+  padding: 20px;
+  margin: 20px;
+  border: 1px solid #ddd;
+  background: white;
+}
+
+.socials {
+  display: flex;
+  gap: 20px;
+}
+
+.icon {
+  font-size: 24px;
+  transition: color 0.3s;
+}
+
+.icon:hover {
+  color: #1890ff;
+}
+
+.footer {
+  text-align: center;
+  padding: 10px;
+  background: #f0f2f5;
+}
