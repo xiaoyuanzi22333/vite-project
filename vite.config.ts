@@ -8,4 +8,9 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+
+  server: {
+    host: true, // 允许通过 IP 访问
+    port: 3000, // 或者你需要的端口
+  },
 })
