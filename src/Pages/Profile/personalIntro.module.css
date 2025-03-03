@@ -1,0 +1,189 @@
+/* Container */
+
+
+.container {
+  font-family: "Roboto", sans-serif;
+  background: linear-gradient(120deg, #f7f9fc, #e6f0f8);
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  width: 100%;
+}
+
+/* Header */
+.header {
+  background-color: #001529;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.headerTitle {
+  color: white;
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Main Content */
+.main {
+  flex: 1;
+  padding: 20px;
+  /* max-width: 200px; */
+  margin: 10px ;
+}
+
+/* Bio Section */
+.bioSection {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.avatar {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+}
+
+.name {
+  margin: 10px 0;
+  color: #001529;
+}
+
+.education {
+  margin: 0;
+  font-size: 16px;
+  color: #555;
+}
+
+
+/* Section Title */
+.sectionTitle {
+  margin-bottom: 20px;
+  color: #001529;
+  font-weight: 600;
+}
+
+/* Skills Section */
+.skills {
+  display: flex; /* 激活 Flexbox 布局 */
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中（如果需要） */
+  flex-wrap: wrap; /* 自动换行，防止内容溢出 */
+  gap: 10px; /* 标签之间的间距 */
+  margin-top: 20px; /* 上下间距（可调整） */
+}
+
+.skillTag {
+  background-color: #e6f7ff;
+  border-color: #91d5ff;
+  color: #0050b3;
+  font-size: 14px;
+  padding: 5px 10px;
+  border-radius: 16px;
+}
+
+/* Projects Section */
+.projects {
+  display: flex; /* 启用 Flexbox 布局 */
+  flex-wrap: wrap; /* 子元素允许换行 */
+  justify-content: center; /* 水平居中对齐 */
+  align-items: center; /* 垂直方向居中（可选） */
+  gap: 40px; /* 卡片之间的间距 */
+  margin-top: 20px; /* 上边距 */
+}
+
+.projectCard {
+  display: flex; /* 启用 Flexbox 布局 */
+  justify-content: center; /* 水平方向居中 */
+  align-items: center; /* 垂直方向居中 */
+  flex-direction: column; /* 子元素垂直排列 */
+  min-height: 400px;
+  width: 400px; /* 固定宽度 */
+  height: 400px; /* 固定高度 */
+  text-align: center; /* 如果有文本，居中对齐 */
+  border-radius: 8px; /* 卡片圆角 */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 卡片阴影 */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* 悬停动画 */
+}
+
+.projectCard:hover {
+  transform: scale(1.05); /* 悬停放大效果 */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* 更深的阴影 */
+}
+
+/* 小屏幕适配 */
+@media (max-width: 768px) {
+  .projectCard {
+    flex: 1 1 100%; /* 每行显示 1 张卡片 */
+  }
+}
+
+.projectDesc {
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.projectLink {
+  color: #1890ff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* Social Links Section */
+.socialLinks {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 30px;
+}
+
+.socialCard {
+  width: 150px;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.socialCard:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.socialLink {
+  color: inherit;
+  text-decoration: none;
+}
+
+.socialIcon {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #1890ff;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  background-color: #001529;
+  color: white;
+  padding: 10px 0;
+  font-size: 14px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .main {
+    padding: 10px;
+  }
+
+  .socialCard {
+    width: 100%;
+  }
+
+  .projects {
+    gap: 15px;
+  }
+}

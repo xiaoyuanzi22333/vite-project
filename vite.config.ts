@@ -10,7 +10,8 @@ export default defineConfig({
   ],
 
   server: {
-    host: true, // 允许通过 IP 访问
-    port: 3000, // 或者你需要的端口
+    host: '0.0.0.0', // 允许外部设备通过 IP 或域名访问
+    allowedHosts: ['xiaoyuanzi22333hoho.xyz'],
+    port: 8000, // 或者你需要的端口
   },
 })
