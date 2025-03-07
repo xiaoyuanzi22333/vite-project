@@ -7,7 +7,7 @@ from azure.core.credentials import AzureKeyCredential
 import json
 
 app = Flask(__name__)
-CORS(app, resources={r"/stream": {"origins": "http://localhost:8000"}})
+CORS(app, resources={r"/stream": {"origins": "https://xiaoyuanzi22333hoho.xyz"}})
 
 def stream_input(input_content="introduce yourself"):
     endpoint = os.getenv("AZURE_INFERENCE_SDK_ENDPOINT", "https://ai-9804549640182ai647595511482.services.ai.azure.com/models")
@@ -59,4 +59,4 @@ def stream():
     return Response(stream_input(input_content), mimetype='text/event-stream')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=6000, debug=True)

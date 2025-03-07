@@ -1,5 +1,5 @@
 import React, { useState, useEffect, FormEvent, ChangeEvent } from "react";
-import './DsChat.module.css';
+import styles from './DsChat.module.css';
 
 interface Message {
   text: string;
@@ -25,21 +25,18 @@ const SendMsg: React.FC = () => {
         return;
       }
 
-      // 添加用户消息到对话
       setMessages((prev) => [...prev, { text: input, isUser: true }]);
       console.log("Starting stream with input:", input);
       setIsStreaming(true);
 
-      const url = `http://localhost:5000/stream?input=${encodeURIComponent(input)}`;
+      const url = `https://xiaoyuanzi22333hoho.xyz:6060/stream?input=${encodeURIComponent(input)}`;
       console.log("Request URL:", url);
 
       try {
         abortController = new AbortController();
         const fetchResponse = await fetch(url, {
           method: "GET",
-          headers: {
-            "Accept": "text/event-stream",
-          },
+          headers: { "Accept": "text/event-stream" },
           signal: abortController.signal,
         });
 
@@ -48,18 +45,16 @@ const SendMsg: React.FC = () => {
         }
 
         reader = fetchResponse.body?.getReader();
-        if (!reader) {
-          throw new Error("Response body is null");
-        }
+        if (!reader) throw new Error("Response body is null");
 
-        let aiResponse = ""; // 累积AI的回复
+        let aiResponse = "";
         const decoder = new TextDecoder();
         while (true) {
           const { done, value } = await reader.read();
           if (done) {
             console.log("[Stream Completed]");
             setIsStreaming(false);
-            setInput(""); // 清空输入框
+            setInput("");
             break;
           }
 
@@ -80,8 +75,7 @@ const SendMsg: React.FC = () => {
                 break;
               } else {
                 console.log(data);
-                aiResponse += " " + data; // 累积流式响应
-                // 实时更新UI
+                aiResponse += " " + data;
                 setMessages((prev) => {
                   const updated = [...prev];
                   if (updated[updated.length - 1]?.isUser) {
@@ -102,77 +96,46 @@ const SendMsg: React.FC = () => {
       }
     };
 
-    if (isStreaming) {
-      startStreaming();
-    }
+    if (isStreaming) startStreaming();
 
     return () => {
-      if (abortController) {
-        abortController.abort();
-      }
-      if (reader) {
-        reader.cancel();
-      }
+      if (abortController) abortController.abort();
+      if (reader) reader.cancel();
       setIsStreaming(false);
     };
   }, [isStreaming]);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    if (!isStreaming && input.trim()) {
-      setIsStreaming(true);
-    }
+    if (!isStreaming && input.trim()) setIsStreaming(true);
   };
 
   return (
-    <div style={{ padding: "20px", maxWidth: "600px", margin: "0 auto" }}>
-      <h1>Chat Here</h1>
-      <div
-        style={{
-          border: "1px solid #ccc",
-          padding: "10px",
-          height: "400px",
-          overflowY: "auto",
-          marginBottom: "20px",
-        }}
-      >
+    <div className={styles.chatContainer}>
+      <h1 className={styles.title}>Chat Here</h1>
+      <div className={styles.messagesContainer}>
         {messages.map((msg, index) => (
           <div
             key={index}
-            style={{
-              margin: "10px 0",
-              textAlign: msg.isUser ? "right" : "left",
-            }}
+            className={`${styles.message} ${msg.isUser ? styles.userMessage : styles.aiMessage}`}
           >
-            <span
-              style={{
-                display: "inline-block",
-                padding: "8px 12px",
-                borderRadius: "10px",
-                backgroundColor: msg.isUser ? "#007bff" : "#e9ecef",
-                color: msg.isUser ? "white" : "black",
-                maxWidth: "70%",
-                wordWrap: "break-word",
-              }}
-            >
-              {msg.text}
-            </span>
+            <span className={styles.messageText}>{msg.text}</span>
           </div>
         ))}
       </div>
-      <form onSubmit={handleSubmit} style={{ display: "flex", gap: "10px" }}>
+      <form onSubmit={handleSubmit} className={styles.inputForm}>
         <input
           type="text"
           value={input}
           onChange={handleInputChange}
           placeholder="Enter your message"
           disabled={isStreaming}
-          style={{ flex: 1, padding: "8px" }}
+          className={styles.input}
         />
         <button
           type="submit"
           disabled={isStreaming}
-          style={{ padding: "8px 16px" }}
+          className={styles.sendButton}
         >
           {isStreaming ? "Streaming..." : "Send"}
         </button>
