@@ -46,6 +46,52 @@
   word-wrap: break-word;
   font-size: 14px;
   line-height: 1.4;
+  white-space: pre-wrap;
+}
+
+/* Markdown content inside bubbles */
+.messageText :global(p) {
+  margin: 0.35rem 0;
+}
+
+.messageText :global(p:first-child) {
+  margin-top: 0;
+}
+
+.messageText :global(p:last-child) {
+  margin-bottom: 0;
+}
+
+.messageText :global(ul),
+.messageText :global(ol) {
+  margin: 0.35rem 0;
+  padding-left: 1.15rem;
+}
+
+.messageText :global(pre) {
+  margin: 0.5rem 0;
+  padding: 0.7rem 0.8rem;
+  border-radius: 10px;
+  overflow: auto;
+  background: rgba(2, 6, 23, 0.06);
+  border: 1px solid rgba(15, 23, 42, 0.12);
+}
+
+.messageText :global(code) {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  font-size: 0.88em;
+}
+
+.messageText :global(:not(pre) > code) {
+  padding: 0.1rem 0.3rem;
+  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(15, 23, 42, 0.1);
+}
+
+.messageText :global(.katex) {
+  font-size: 1em;
 }
 
 .userMessage .messageText {

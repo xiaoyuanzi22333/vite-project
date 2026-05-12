@@ -1,0 +1,60 @@
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  border-radius: 999px;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.55);
+}
+
+.dotAuthed {
+  background: rgba(34, 211, 238, 0.95);
+}
+
+.label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--app-body-fg);
+  max-width: 9.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.popover {
+  width: 260px;
+}
+
+.muted {
+  color: var(--app-hint);
+  font-size: 0.8rem;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.error {
+  margin-top: 0.5rem;
+  color: #fb7185;
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+

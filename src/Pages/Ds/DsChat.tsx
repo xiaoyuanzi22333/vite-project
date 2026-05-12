@@ -1,5 +1,6 @@
 import React, { useState, useEffect, FormEvent, ChangeEvent } from "react";
 import styles from './DsChat.module.css';
+import { MarkdownMessage } from "../../ui/MarkdownMessage";
 
 interface Message {
   text: string;
@@ -29,7 +30,7 @@ const SendMsg: React.FC = () => {
       console.log("Starting stream with input:", input);
       setIsStreaming(true);
 
-      const url = `https://xiaoyuanzi22333hoho.xyz:6060/stream?input=${encodeURIComponent(input)}`;
+      const url = `http://100.100.102.102:8000/stream?input=${encodeURIComponent(input)}`;
       console.log("Request URL:", url);
 
       try {
@@ -44,7 +45,7 @@ const SendMsg: React.FC = () => {
           throw new Error(`HTTP error! status: ${fetchResponse.status}`);
         }
 
-        reader = fetchResponse.body?.getReader();
+        reader = fetchResponse.body?.getReader() ?? null;
         if (!reader) throw new Error("Response body is null");
 
         let aiResponse = "";
@@ -119,7 +120,9 @@ const SendMsg: React.FC = () => {
             key={index}
             className={`${styles.message} ${msg.isUser ? styles.userMessage : styles.aiMessage}`}
           >
-            <span className={styles.messageText}>{msg.text}</span>
+            <span className={styles.messageText}>
+              <MarkdownMessage content={msg.text} />
+            </span>
           </div>
         ))}
       </div>

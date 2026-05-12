@@ -1,50 +1,58 @@
-# React + TypeScript + Vite
+# Steve's Home
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A personal website (React + Vite) with:
+- **Frontend**: pages + router UI
+- **Backend**: Flask auth/session APIs + LLM streaming endpoint
 
-Currently, two official plugins are available:
+## Requirements
+- **Node.js**: recommended 18+ (or 20+)
+- **Python**: 3.10+
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Quick start
+### 1) Frontend
+```bash
+npm install
+npm run dev
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+By default the dev server runs on **http://localhost:8000** (see `vite.config.ts`).
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+### 2) Backend (Flask)
+Create your `.env` first:
+```bash
+cp .env.example .env
 ```
+
+Then run:
+```bash
+python backend/Dseek.py
+```
+
+Backend listens on **http://127.0.0.1:6000** and serves:
+- **Auth APIs**: `/auth/*` (cookie session)
+- **Health**: `/health`
+- **LLM stream (SSE)**: `/stream?input=...`
+
+## Environment variables
+See `.env.example`.
+
+- **Frontend**
+  - `VITE_AUTH_BASE_URL`: auth backend base URL (optional). If empty, frontend calls same-origin `/auth/*`.
+
+- **Backend (Flask)**
+  - `FLASK_SECRET_KEY`: required for cookie sessions
+  - `AUTH_DB_PATH`: sqlite path for auth DB (defaults to `backend/auth.sqlite3` if not set)
+  - `SUPER_ADMIN_USER` / `SUPER_ADMIN_PASS`: optional one-time admin seed on backend startup
+
+- **LLM routing**
+  - Default path (if Azure vars are not set): OpenAI-compatible server at `LLM_BASE_URL` with model `LLM_MODEL`
+  - Optional Azure path (only used if all are set): `AZURE_INFERENCE_SDK_ENDPOINT`, `AZURE_INFERENCE_SDK_KEY`, `DEPLOYMENT_NAME`
+
+## Dev proxy (frontend -> backend)
+During development, Vite proxies **`/auth` -> `http://127.0.0.1:6000`** (see `vite.config.ts`).
+That means the frontend can call `/auth/me` without worrying about CORS.
+
+## User management
+- You can register via API: `POST /auth/register`
+- Or seed an admin via `.env`: `SUPER_ADMIN_USER` + `SUPER_ADMIN_PASS`
+- A helper script exists: `add_user.py` (it inserts a user into sqlite). Review/edit it before use.
