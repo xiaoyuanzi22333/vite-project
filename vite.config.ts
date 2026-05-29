@@ -39,6 +39,13 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
       },
+      // bot_backend APIs — must NOT use `/chat` (conflicts with SPA route GET /chat on refresh)
+      '/api/chat': {
+        target: 'http://127.0.0.1:12000',
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
     },
   },
 })

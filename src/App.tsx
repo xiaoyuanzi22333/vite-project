@@ -29,7 +29,7 @@ const navItems: NavCard[] = [
   },
   {
     kind: 'external',
-    href: 'https://xyzhoho.com:5050',
+    href: 'https://memos.xyzhoho.com',
     title: 'Memos',
     description: 'External notes workspace (opens in a new tab).',
     icon: <ExportOutlined className="text-xl text-emerald-600" />,
